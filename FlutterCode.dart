@@ -6,6 +6,10 @@ import 'package:image_picker/image_picker.dart';
 void main() {
   runApp(MaterialApp(
     home: MyApp(),
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    ),
   ));
 }
 
@@ -37,7 +41,7 @@ class _MyAppState extends State<MyApp> {
     if (image == null) return;
 
     try {
-      socket = await Socket.connect('192.168.1.18', 100);
+      socket = await Socket.connect('192.168.1.9', 100);
       listenForMessages();
     } catch (e) {
       print(e.toString());
@@ -71,16 +75,25 @@ class _MyAppState extends State<MyApp> {
         title: Text('Image Picker Example'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            image == null ? Text('No image selected.') : Image.file(image!),
-            SizedBox(
-                height: 20), // Add space between the image and acknowledgment
-            Text(
-              acknowledgmentMessage,
-              style: TextStyle(fontSize: 18, color: Colors.green),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              image == null
+                  ? Text(
+                'No image selected.',
+                style: TextStyle(fontSize: 18, color: Colors.red),
+              )
+                  : Image.file(image!),
+              SizedBox(height: 20), // Add space between the image and acknowledgment
+              Text(
+                acknowledgmentMessage,
+                style: TextStyle(fontSize: 18, color: Colors.green),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Column(
