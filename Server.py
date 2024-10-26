@@ -1,12 +1,9 @@
-from flask_socketio import SocketIO, emit
 import os
 import socket
 import concurrent.futures
 import threading
 import pickle
 import datetime
-from PIL import Image, ImageDraw, ImageFont
-from io import BytesIO
 
 UPLOADS_FOLDER = 'uploads/'  # Specify the folder where you want to store the images
 # Create a dictionary to store locks for each image
